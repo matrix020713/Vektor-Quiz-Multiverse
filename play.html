@@ -709,6 +709,8 @@
 
     <script>
 
+    let gameCounted = false;
+
     const easyQuestions = [
     {question:"What planet do humans live on?",choices:["Mars","Earth","Venus","Jupiter"],correct:"Earth"},
     {question:"How many days are in a week?",choices:["5","6","7","8"],correct:"7"},
@@ -878,6 +880,8 @@ document.querySelectorAll(".difficulty-btn").forEach(button => {
         }
         
         function startGame(){
+
+        gameCounted = false;
 
         let nameBox=document.getElementById("player-name");
 
@@ -1343,6 +1347,25 @@ document.querySelectorAll(".difficulty-btn").forEach(button => {
 
         document.getElementById("feedback-container")
         .classList.add("hidden");
+
+        let gamesPlayed = Number(localStorage.getItem("gamesPlayed")) || 0;
+
+        gamesPlayed++;
+
+        localStorage.setItem("gamesPlayed", gamesPlayed);
+
+        if (!gameCounted) {
+
+            let gamesPlayed = Number(localStorage.getItem("gamesPlayed")) || 0;
+
+            gamesPlayed++;
+
+            localStorage.setItem("gamesPlayed", gamesPlayed);
+
+            updateQuestProgress();
+
+            gameCounted = true;
+        }
 
         }
 
